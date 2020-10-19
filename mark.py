@@ -52,6 +52,7 @@ async def on_message(message):
                 im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
 
             os.remove(imagepath)
+            #await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + "/" + str(message.channel.id) + ".png"))
 
     if message.content.lower().startswith("mark, ") or message.content.lower().startswith("dr. mark, ") or message.content.lower().startswith("dr mark"):
 
@@ -142,6 +143,7 @@ async def on_message(message):
 
                 else:
                     im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
+#                    await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + ".png"))
                     sendImage = True
 
                 os.remove(gis.results()[0].path)
@@ -153,7 +155,9 @@ async def on_message(message):
         elif 'mark, flip' in message.content.lower():
             im1 = Image.open("/home/pi/mark/images/" + str(message.channel.id) + ".png")
             im1 = im1.transpose(Image.FLIP_LEFT_RIGHT)
-            im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")            sendImage = True
+            im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
+#            await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + ".png"))
+            sendImage = True
 
         elif 'mark, flop' in message.content.lower():
             im1 = Image.open("/home/pi/mark/images/" + str(message.channel.id) + ".png")
@@ -316,6 +320,7 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
             await message.channel.send("thanks viban eom")
         print('entering grt lottery')
         if random.randrange(100) == 69:
+        #if True:
             grtphrases = ["You should come to a GRT meal!", "How has your sleep been?", "Ants have very interesting social hierarcharies with complex gender roles!", "Here guys, I made some bread! :bread:", "Bustin by Neil Cicierega is about sex", "Don't let people in through the 282 entrance!", "MIT still isn't releasing statistics on what happens to professors found guilty of sexual harassment.", "I don't understand this meme", "I made hummus!", "I made boba, do you guys want any?", "Do you want some soymilk?", "I am getting in an argument with faculty.", "I am getting in an argument with MIT administration.", "I have pissed off the mighty Reif himself.", "I am arguing with Cindy Barnhart.", "I am frying some stuff, do you want some plantains?", "How are we gonna take care of the dish situation?", "I work at Exxon now", "How's your semester going?", "This seems like a bad idea", "How can we do this in a safer way?", "Can we direct this into something more productive?", "Do you think that this is an effective strategy?", "Please consider talking to S^3 for resources."]
             await message.channel.send(random.choice(grtphrases))
 client.run(token)
