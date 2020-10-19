@@ -143,7 +143,6 @@ async def on_message(message):
 
                 else:
                     im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
-#                    await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + ".png"))
                     sendImage = True
 
                 os.remove(gis.results()[0].path)
@@ -155,9 +154,7 @@ async def on_message(message):
         elif 'mark, flip' in message.content.lower():
             im1 = Image.open("/home/pi/mark/images/" + str(message.channel.id) + ".png")
             im1 = im1.transpose(Image.FLIP_LEFT_RIGHT)
-            im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
-#            await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + ".png"))
-            sendImage = True
+            im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")            sendImage = True
 
         elif 'mark, flop' in message.content.lower():
             im1 = Image.open("/home/pi/mark/images/" + str(message.channel.id) + ".png")
