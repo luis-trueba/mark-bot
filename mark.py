@@ -52,7 +52,6 @@ async def on_message(message):
                 im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
 
             os.remove(imagepath)
-            #await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + "/" + str(message.channel.id) + ".png"))
 
     if message.content.lower().startswith("mark, ") or message.content.lower().startswith("dr. mark, ") or message.content.lower().startswith("dr mark"):
 
