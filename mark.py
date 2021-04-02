@@ -1,4 +1,4 @@
-# cesar.py
+# mark.py
 import os
 import random
 import asyncio
@@ -43,25 +43,25 @@ async def on_message(message):
     if message.attachments != []:
         if '.png' in message.attachments[0].filename or '.jpg' in message.attachments[0].filename or '.jpeg' in message.attachments[0].filename:
             print(message.attachments)
-            await message.attachments[0].save("/home/pi/cesar/images/" + message.attachments[0].filename)
-            imagepath = "/home/pi/cesar/images/" + message.attachments[0].filename
+            await message.attachments[0].save("/home/pi/mark/images/" + message.attachments[0].filename)
+            imagepath = "/home/pi/mark/images/" + message.attachments[0].filename
             im1 = Image.open(imagepath)
             width, height = im1.size
 
             if width < 4096 and height < 4096:
-                im1.save("/home/pi/cesar/images/" + str(message.channel.id) + ".png")
+                im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
 
             os.remove(imagepath)
-            #await message.channel.send(file = discord.File("/home/pi/cesar/images/" + str(message.channel.id) + "/" + str(message.channel.id) + ".png"))
+            #await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + "/" + str(message.channel.id) + ".png"))
 
-    if message.content.lower().startswith("cesar, ") or message.content.lower().startswith("dr. cesar, ") or message.content.lower().startswith("dr cesar"):
+    if message.content.lower().startswith("mark, ") or message.content.lower().startswith("dr. mark, ") or message.content.lower().startswith("dr mark"):
 
-        if 'cesar, reboot' in message.content.lower() and message.author.id == 235221408274186242:
+        if 'mark, reboot' in message.content.lower() and message.author.id == 235221408274186242:
             await message.channel.send("Rebooting...")
             os.system("sudo reboot")
 
-        if 'cesar, roll' in message.content.lower():
-            diceinput = message.content.lower().replace(' ', "").split('cesar,roll', 1)[-1].split('d')
+        if 'mark, roll' in message.content.lower():
+            diceinput = message.content.lower().replace(' ', "").split('mark,roll', 1)[-1].split('d')
             #print(diceinput)
             print(str(diceinput))
             numberdice = diceinput[0]
@@ -80,7 +80,7 @@ async def on_message(message):
                             output = random.randrange(int(diesides)) + 1
                             #print(output)
                             results.append(output)
-                        payload = "rolled `" + message.content.lower().replace(' ', "").split('cesar,roll', 1)[-1] + "` and got `" + str(results).replace("[", "").replace("]", "") + "`" + ' = ' + str(sum(results))
+                        payload = "rolled `" + message.content.lower().replace(' ', "").split('mark,roll', 1)[-1] + "` and got `" + str(results).replace("[", "").replace("]", "") + "`" + ' = ' + str(sum(results))
                         await message.channel.send(payload)
                     else:
                         await message.channel.send("Dice can't have 0 sides!")
@@ -89,7 +89,7 @@ async def on_message(message):
                     payload = "You didn't give me a number!"
                     await message.channel.send(payload)
 
-        elif 'cesar, should i' in message.content.lower():
+        elif 'mark, should i' in message.content.lower():
 
             if ' or ' in message.content.lower():
                 payload = "You should "
@@ -101,15 +101,15 @@ async def on_message(message):
 
             await message.channel.send(payload + random.choice(answers))
 
-        elif 'cesar, say ' in message.content.lower():
-            saystart = message.content.lower().find("cesar, say") + 10
+        elif 'mark, say ' in message.content.lower():
+            saystart = message.content.lower().find("mark, say") + 10
             await message.channel.send(message.content[saystart:])
             await message.delete()
 
-        elif 'cesar, can we bust' in message.content.lower():
+        elif 'mark, can we bust' in message.content.lower():
             await message.channel.send('https://www.youtube.com/watch?v=0tdyU_gW6WE')
 
-        elif 'cesar, can we get' in message.content.lower():
+        elif 'mark, can we get' in message.content.lower():
             results = YoutubeSearch(message.content.lower().split("can we get",1)[1], max_results = 1, mode = "dict", offset = 1).result()
             await debugchannel.send("```" + str(results) + "```")
             if results == {'search_result': []}:
@@ -120,10 +120,10 @@ async def on_message(message):
                 link = results["search_result"][0]["link"]
                 print(results)
                 await message.channel.send(link)
-        elif 'cesar, show me' in message.content.lower():
+        elif 'mark, show me' in message.content.lower():
             _search_params = {
 
-                'q': message.content.lower().split("cesar, show me",1)[1],
+                'q': message.content.lower().split("mark, show me",1)[1],
 
                 'num': 1,
 
@@ -131,7 +131,7 @@ async def on_message(message):
 
             }
 
-            gis.search(search_params=_search_params, path_to_dir = "/home/pi/cesar/images/")
+            gis.search(search_params=_search_params, path_to_dir = "/home/pi/mark/images/")
             print(str(gis.results()[0].path))
             if '.png' in gis.results()[0].path or '.jpg' in gis.results()[0].path or '.jpeg' in gis.results()[0].path:
                 print(os.path.getsize(gis.results()[0].path))
@@ -142,8 +142,8 @@ async def on_message(message):
                     await message.channel.send(str(gis.results()[0].url))
 
                 else:
-                    im1.save("/home/pi/cesar/images/" + str(message.channel.id) + ".png")
-#                    await message.channel.send(file = discord.File("/home/pi/cesar/images/" + str(message.channel.id) + ".png"))
+                    im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
+#                    await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + ".png"))
                     sendImage = True
 
                 os.remove(gis.results()[0].path)
@@ -152,60 +152,60 @@ async def on_message(message):
                 await message.channel.send(str(gis.results()[0].url))
                 os.remove(gis.results()[0].path)
 
-        elif 'cesar, flip' in message.content.lower():
-            im1 = Image.open("/home/pi/cesar/images/" + str(message.channel.id) + ".png")
+        elif 'mark, flip' in message.content.lower():
+            im1 = Image.open("/home/pi/mark/images/" + str(message.channel.id) + ".png")
             im1 = im1.transpose(Image.FLIP_LEFT_RIGHT)
-            im1.save("/home/pi/cesar/images/" + str(message.channel.id) + ".png")
-#            await message.channel.send(file = discord.File("/home/pi/cesar/images/" + str(message.channel.id) + ".png"))
+            im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
+#            await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + ".png"))
             sendImage = True
 
-        elif 'cesar, flop' in message.content.lower():
-            im1 = Image.open("/home/pi/cesar/images/" + str(message.channel.id) + ".png")
+        elif 'mark, flop' in message.content.lower():
+            im1 = Image.open("/home/pi/mark/images/" + str(message.channel.id) + ".png")
             im1 = im1.transpose(Image.FLIP_TOP_BOTTOM)
-            im1.save("/home/pi/cesar/images/" + str(message.channel.id) + ".png")
-#            await message.channel.send(file = discord.File("/home/pi/cesar/images/" + str(message.channel.id) + ".png"))
+            im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
+#            await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + ".png"))
             sendImage = True
 
-        elif 'cesar, jpeg' in message.content.lower():
-            jpeg_quality_input = message.content.lower().split("cesar, jpeg ",1)[1]
+        elif 'mark, jpeg' in message.content.lower():
+            jpeg_quality_input = message.content.lower().split("mark, jpeg ",1)[1]
             if jpeg_quality_input.isdigit() and int(jpeg_quality_input) <= 100 and int(jpeg_quality_input) > 0:
                 jpeg_quality = int(jpeg_quality_input)
             else:
                 print("not valid number")
                 jpeg_quality = 75
-            im1 = Image.open("/home/pi/cesar/images/" + str(message.channel.id) + ".png")
-            im1.convert('RGB').save("/home/pi/cesar/images/" + str(message.channel.id) + ".jpg", quality=jpeg_quality)
-            im2 = Image.open("/home/pi/cesar/images/" + str(message.channel.id) + ".jpg")
-            im2.save("/home/pi/cesar/images/" + str(message.channel.id) + ".png")
+            im1 = Image.open("/home/pi/mark/images/" + str(message.channel.id) + ".png")
+            im1.convert('RGB').save("/home/pi/mark/images/" + str(message.channel.id) + ".jpg", quality=jpeg_quality)
+            im2 = Image.open("/home/pi/mark/images/" + str(message.channel.id) + ".jpg")
+            im2.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
             sendImage = True
-            os.remove("/home/pi/cesar/images/" + str(message.channel.id) + ".jpg")
+            os.remove("/home/pi/mark/images/" + str(message.channel.id) + ".jpg")
 
-        elif 'cesar, saturation' in message.content.lower():
-            saturation_input = message.content.lower().split("cesar, saturation ",1)[1]
+        elif 'mark, saturation' in message.content.lower():
+            saturation_input = message.content.lower().split("mark, saturation ",1)[1]
             if saturation_input.replace('.', '', 1).isdigit() and float(saturation_input) <= 5 and float(saturation_input) >= 0:
                 saturation = float(saturation_input)
             else:
                 print("not valid number")
                 saturation = 5.0
 
-            im1 = Image.open("/home/pi/cesar/images/" + str(message.channel.id) + ".png")
+            im1 = Image.open("/home/pi/mark/images/" + str(message.channel.id) + ".png")
             enhance = ImageEnhance.Color(im1)
             im1 = enhance.enhance(saturation)
-            im1.save("/home/pi/cesar/images/" + str(message.channel.id) + ".png")
+            im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
             sendImage = True
 
-        elif 'cesar, sharpness' in message.content.lower():
-            sharpness_input = message.content.lower().split("cesar, sharpness ",1)[1]
+        elif 'mark, sharpness' in message.content.lower():
+            sharpness_input = message.content.lower().split("mark, sharpness ",1)[1]
             if sharpness_input.replace('.', '', 1).isdigit() and float(sharpness_input) <= 5 and float(sharpness_input) >= 0:
                 sharpness = float(sharpness_input)
             else:
                 print("not valid number")
                 sharpness = 5.0
 
-            im1 = Image.open("/home/pi/cesar/images/" + str(message.channel.id) + ".png")
+            im1 = Image.open("/home/pi/mark/images/" + str(message.channel.id) + ".png")
             enhance = ImageEnhance.Sharpness(im1)
             im1 = enhance.enhance(sharpness)
-            im1.save("/home/pi/cesar/images/" + str(message.channel.id) + ".png")
+            im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
             sendImage = True
 
 
@@ -214,7 +214,7 @@ async def on_message(message):
             await message.channel.send("""(gynes).[8] The colonies are described as superorganisms because the ants appear to operate as a unified entity, collectively working together to support the colony.[9][10] Ants gathering food  Ants have colonised almost every landmass on Earth. The only places lacking indigenous ants are Antarctica and a few remote or inhospitable islands. Ants thrive in most ecosystems and may form 15-25% of the terrestrial animal biomass.[11] Their success in so many environments has been attributed to their social organisation and their ability to modify habitats, tap resources, and defend themselves. Their long co-evolution with other species has led to mimetic, commensal, parasitic, and mutualistic relationships.[12]  Ant societies have division of labour, communication between individuals, and an ability to solve complex problems.[13] These parallels with human societies have long been an inspiration and subject of study. Many human""")
             await message.channel.send("""cultures make use of ants in cuisine, medication, and rituals. Some species are valued in their role as biological pest control agents.[14] Their ability to exploit resources may bring ants into conflict with humans, however, as they can damage crops and invade buildings. Some species, such as the red imported fire ant (Solenopsis invicta), are regarded as invasive species, establishing themselves in areas where they have been introduced accidentally.""")
 
-        elif 'cesar, timeout ' in message.content.lower():
+        elif 'mark, timeout ' in message.content.lower():
             if 'horny' in str( message.channel):
                 await message.channel.send('Horny Crimes cannot be committed in ' + message.channel.mention)
             else:
@@ -229,7 +229,7 @@ async def on_message(message):
                         payload = 'Put ' + member.mention + ' in timeout for crimes in ' + str(message.channel.mention)
                         await message.channel.send(payload)
 
-        elif 'cesar, homestuck jail ' in message.content.lower() and message.guild.id == 650229854247321611:
+        elif 'mark, homestuck jail ' in message.content.lower() and message.guild.id == 650229854247321611:
 
             if 'homestuck' in str( message.channel) or 'horny' in str( message.channel):
 
@@ -263,7 +263,7 @@ async def on_message(message):
 
 
 
-        elif 'cesar, jailbreak adventure' in message.content.lower() and message.guild.id == 650229854247321611:
+        elif 'mark, jailbreak adventure' in message.content.lower() and message.guild.id == 650229854247321611:
 
             if 'homestuck' in str( message.channel) or 'horny' in str( message.channel):
 
@@ -285,33 +285,33 @@ async def on_message(message):
 
 
         elif ' help' in message.content.lower():
-            payload = """ Hello kiddos, I'm Cesar!
-My prefix is `Cesar, ` and I can do all sorts of things. Please, no parties on my watch, though.
--Say `Cesar, roll NdXYZ` to roll N XYZ sided dice! e.g `Cesar, roll 12d6` rolls 12x 6-sided dice
--Say `Cesar, can we get <search term>` and I'll drop the first youtube result for that search into the chat.
--Say `Cesar, should I ____` and I will respond yes or no for single choices, and will choose between multiple options separated by the substring ` or `!
--Say `Cesar, show me ____` and I will find a good image matching your search parameters.
--Say `Cesar, flip` or `Cesar, flop` and I will invert the most recent image sent to the channel across the vertical or horizontal axis, respectively.
--Say `Cesar, jpeg <1 - 100>` and I will jpeg compress the most recent image sent to the channel with that percent of quality.
--Say `Cesar, saturation <0.0 - 5.0>` and I will adjust the saturation of the most recent image sent to the channel. 0 is grayscale, 1 is normal.
--Say `Cesar, sharpness <0.0 - 5.0>` and I will adjust the sharpness of the most recent image sent to the channel. 0 is very blurry, 1 is normal, 5 is extremely sharp.
+            payload = """ Hello kiddos, I'm Mark!
+My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my watch, though.
+-Say `Mark, roll NdXYZ` to roll N XYZ sided dice! e.g `Mark, roll 12d6` rolls 12x 6-sided dice
+-Say `Mark, can we get <search term>` and I'll drop the first youtube result for that search into the chat.
+-Say `Mark, should I ____` and I will respond yes or no for single choices, and will choose between multiple options separated by the substring ` or `!
+-Say `Mark, show me ____` and I will find a good image matching your search parameters.
+-Say `Mark, flip` or `Mark, flop` and I will invert the most recent image sent to the channel across the vertical or horizontal axis, respectively.
+-Say `Mark, jpeg <1 - 100>` and I will jpeg compress the most recent image sent to the channel with that percent of quality.
+-Say `Mark, saturation <0.0 - 5.0>` and I will adjust the saturation of the most recent image sent to the channel. 0 is grayscale, 1 is normal.
+-Say `Mark, sharpness <0.0 - 5.0>` and I will adjust the sharpness of the most recent image sent to the channel. 0 is very blurry, 1 is normal, 5 is extremely sharp.
 -If you want more features, bap luis and he might eventually get around to it."""
             if message.guild.id == 650229854247321611:
                 payload = payload + """
--Also, in this server, I can send users to Horny Jail with `Cesar, jail <mention users>`
--You can free them early with `Cesar, jailbreak <mention users>` but this is frowned upon as it is obstruction of justice."""
+-Also, in this server, I can send users to Horny Jail with `Mark, jail <mention users>`
+-You can free them early with `Mark, jailbreak <mention users>` but this is frowned upon as it is obstruction of justice."""
             await message.channel.send(payload)
 
 
         else:
-            await message.channel.send('I do not understand this meme. Say "Cesar, help" for a list of officially supported commands.')
+            await message.channel.send('I do not understand this meme. Say "Mark, help" for a list of officially supported commands.')
         if sendImage == True:
             print("Trying to send image")
-            print("size = " + str(os.stat("/home/pi/cesar/images/" + str(message.channel.id) + ".png").st_size))
-            if os.stat("/home/pi/cesar/images/" + str(message.channel.id) + ".png").st_size > 8000000:
+            print("size = " + str(os.stat("/home/pi/mark/images/" + str(message.channel.id) + ".png").st_size))
+            if os.stat("/home/pi/mark/images/" + str(message.channel.id) + ".png").st_size > 8000000:
                 await message.channel.send("Image too large. Try again with a smaller image")
             else:
-                await message.channel.send(file = discord.File("/home/pi/cesar/images/" + str(message.channel.id) + ".png"))
+                await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + ".png"))
             sendImage = False
     else:
         if 'party' in message.content.lower():
