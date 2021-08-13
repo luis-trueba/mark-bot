@@ -32,7 +32,7 @@ async def on_message(message):
         return
 
     if message.author.id in timeoutlist:
-        if "i am sorry" in message.content.lower() or "i'm sorry" in message.content.lower() or "i apologize" in message.content.lower():
+        if "i am sorry" in message.content.lower() or "i'm sorry" in message.content.lower() or "i apologize" in message.content.lower() or "i’m sorry" in message.content.lower() or message.content.lower().startswith("sorry"):
             timeoutlist.remove(message.author.id)
             await message.channel.send("All is forgiven")
         else:
@@ -60,7 +60,7 @@ async def on_message(message):
             await message.channel.send("Rebooting...")
             os.system("sudo reboot")
 
-        if 'mark, roll' in message.content.lower():
+        elif 'mark, roll' in message.content.lower():
             diceinput = message.content.lower().replace(' ', "").split('mark,roll', 1)[-1].split('d')
             #print(diceinput)
             print(str(diceinput))
