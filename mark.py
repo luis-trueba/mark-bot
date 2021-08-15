@@ -325,4 +325,8 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
             await message.channel.send(random.choice(grtphrases))
         if 'pog' in message.content.lower() and message.author.id == 235221408274186242:
             await message.channel.send(message.author.mention + ", don't say pog")
-client.run(token)
+while True:
+    try:
+        client.loop.run_until_complete(client.start(token))
+    except BaseException:
+            time.sleep(5)
