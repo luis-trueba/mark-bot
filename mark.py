@@ -3,6 +3,7 @@ import os
 import socket
 import random
 import asyncio
+import subprocess
 
 import discord
 from dotenv import load_dotenv
@@ -62,7 +63,12 @@ async def on_message(message):
             os.system("sudo reboot")
         
         elif 'mark, ip address' in message.content.lower() and message.author.id == 235221408274186242:
-            await message.channel.send(str(socket.gethostbyname(socket.gethostname() + ".local")))
+            cmd = "ifconfig | grep 255.255.255.0"
+            inet = subprocess.check_output(cmd, shell = True)
+            inet = wlan.decode("utf-8")
+            inet = wlan.split(" ")
+            inet_addr = inet[inet.index("inet")+1]
+            await message.channel.send(str(inet_addr))
 
         elif 'mark, roll' in message.content.lower():
             diceinput = message.content.lower().replace(' ', "").split('mark,roll', 1)[-1].split('d')
