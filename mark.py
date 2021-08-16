@@ -1,5 +1,6 @@
 # mark.py
 import os
+import socket
 import random
 import asyncio
 
@@ -59,6 +60,9 @@ async def on_message(message):
         if 'mark, reboot' in message.content.lower() and message.author.id == 235221408274186242:
             await message.channel.send("Rebooting...")
             os.system("sudo reboot")
+        
+        elif 'mark, ip address' in message.content.lower() and message.author.id == 235221408274186242:
+            await message.channel.send(str(socket.gethostbyname(socket.gethostname())))
 
         elif 'mark, roll' in message.content.lower():
             diceinput = message.content.lower().replace(' ', "").split('mark,roll', 1)[-1].split('d')
