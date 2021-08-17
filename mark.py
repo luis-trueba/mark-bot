@@ -63,10 +63,10 @@ async def on_message(message):
             os.system("sudo reboot")
         
         elif 'mark, ifconfig' in message.content.lower() and message.author.id == 235221408274186242:
-            cmd = "ifconfig"
+            cmd = "ifconfig -a"
             inet = subprocess.check_output(cmd, shell = True)
-            inet = wlan.decode("utf-8")
-            inet_addr = inet[inet.index("inet")+1]
+            #inet = wlan.decode("utf-8")
+            #inet_addr = inet[inet.index("inet")+1]
             await message.channel.send(inet)
 
         elif 'mark, roll' in message.content.lower():
