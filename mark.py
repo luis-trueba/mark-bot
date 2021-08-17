@@ -62,13 +62,12 @@ async def on_message(message):
             await message.channel.send("Rebooting...")
             os.system("sudo reboot")
         
-        elif 'mark, ip address' in message.content.lower() and message.author.id == 235221408274186242:
-            cmd = "ifconfig | grep 255.255.255.0"
+        elif 'mark, ifconfig' in message.content.lower() and message.author.id == 235221408274186242:
+            cmd = "ifconfig"
             inet = subprocess.check_output(cmd, shell = True)
             inet = wlan.decode("utf-8")
-            inet = wlan.split(" ")
             inet_addr = inet[inet.index("inet")+1]
-            await message.channel.send(str(inet_addr))
+            await message.channel.send(inet)
 
         elif 'mark, roll' in message.content.lower():
             diceinput = message.content.lower().replace(' ', "").split('mark,roll', 1)[-1].split('d')
@@ -339,4 +338,4 @@ while True:
     try:
         client.loop.run_until_complete(client.start(token))
     except BaseException:
-            time.sleep(5)
+            sleep(5)
