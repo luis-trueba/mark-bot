@@ -2,6 +2,7 @@
 import os
 import socket
 import random
+import time
 import asyncio
 import subprocess
 
@@ -338,4 +339,4 @@ while True:
     try:
         client.loop.run_until_complete(client.start(token))
     except BaseException:
-            sleep(5)
+            time.sleep(5)
