@@ -67,7 +67,7 @@ async def on_message(message):
             inet = subprocess.check_output(cmd, shell = True)
             #inet = wlan.decode("utf-8")
             #inet_addr = inet[inet.index("inet")+1]
-            await message.channel.send(inet)
+            await message.channel.send(str(inet))
 
         elif 'mark, roll' in message.content.lower():
             diceinput = message.content.lower().replace(' ', "").split('mark,roll', 1)[-1].split('d')
