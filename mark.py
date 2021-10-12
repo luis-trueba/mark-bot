@@ -319,6 +319,7 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
 -Say `Mark, jpeg <1 - 100>` and I will jpeg compress the most recent image sent to the channel with that percent of quality.
 -Say `Mark, saturation <0.0 - 5.0>` and I will adjust the saturation of the most recent image sent to the channel. 0 is grayscale, 1 is normal.
 -Say `Mark, sharpness <0.0 - 5.0>` and I will adjust the sharpness of the most recent image sent to the channel. 0 is very blurry, 1 is normal, 5 is extremely sharp.
+-Say `Mark, brightness <0.0 - 5.0>` and I will adjust the brightness of the most recent image sent to the channel. 0 is pitch black, 1 is normal, 5 is extremely bright.
 -If you want more features, bap luis and he might eventually get around to it."""
             if message.guild.id == 650229854247321611:
                 payload = payload + """
