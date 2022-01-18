@@ -234,7 +234,7 @@ async def on_message(message):
 
         elif 'mark, resize' in message.content.lower():
             size_input = message.content.lower().split("mark, resize ",1)[1]
-            if size_input.replace('.', '', 1).isdigit() and float(size_input) <= 5 and float(brightness_input) >= 0:
+            if size_input.replace('.', '', 1).isdigit() and float(size_input) <= 5 and float(size_input) >= 0:
                 img_size = float(size_input)
             else:
                 print("not valid number")
