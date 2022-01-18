@@ -241,7 +241,7 @@ async def on_message(message):
                 img_size = 1.0
 
             im1 = Image.open("/home/pi/mark/images/" + str(message.channel.id) + ".png")
-            im1 = im1.resize((int(im1.size[0]*img_size), int(im1.size[1]*img_size)))
+            im1 = im1.resize((int(float(im1.width)*img_size), int(float(im1.height)*img_size)))
             im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
             sendImage = True
 
