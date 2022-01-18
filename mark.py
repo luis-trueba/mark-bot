@@ -232,6 +232,19 @@ async def on_message(message):
             im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
             sendImage = True
 
+        elif 'mark, resize' in message.content.lower():
+            size_input = message.content.lower().split("mark, resize ",1)[1]
+            if size_input.replace('.', '', 1).isdigit() and float(size_input) <= 5 and float(brightness_input) >= 0:
+                img_size = float(size_input)
+            else:
+                print("not valid number")
+                img_size = 1.0
+
+            im1 = Image.open("/home/pi/mark/images/" + str(message.channel.id) + ".png")
+            im1 = im1.resize((round(im.size[0]*img_size), round(im.size[1]*img_size)))
+            im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
+            sendImage = True
+
 
         elif 'ants' in message.content.lower():
             await message.channel.send("""Ants are eusocial insects of the family Formicidae and, along with the related wasps and bees, belong to the order Hymenoptera. Ants evolved from wasp-like ancestors in the Cretaceous period, about 140 million years ago, and diversified after the rise of flowering plants. More than 12,500 of an estimated total of 22,000 species have been classified.[5][6] They are easily identified by their elbowed antennae and the distinctive node-like structure that forms their slender waists.  Ants form colonies that range in size from a few dozen predatory individuals living in small natural cavities to highly organised colonies that may occupy large territories and consist of millions of individuals. Larger colonies consist of various castes of sterile, wingless females, most of which are workers (ergates), as well as soldiers (dinergates) and other specialised groups.[7][8] Nearly all ant colonies also have some fertile males called "drones" (aner) and one or more fertile females called "queens\"""")
