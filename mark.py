@@ -20,6 +20,7 @@ token = os.getenv("discordtoken")
 gis = GoogleImagesSearch(os.getenv("gis1"), os.getenv("gis2"))
 
 timeoutlist = []
+lastImage = {}
 
 client = discord.Client()
 @client.event
@@ -31,7 +32,7 @@ async def on_message(message):
     sendImage = False
     #print(message.channel)
     debugchannel = client.get_channel(715460456227274752)
-    if message.author == client.user:
+    if message.author == client.user and message.attachments == []:
         return
 
     if message.author.id in timeoutlist:
@@ -44,7 +45,7 @@ async def on_message(message):
         return
 
     if message.attachments != []:
-        if '.png' in message.attachments[0].filename or '.jpg' in message.attachments[0].filename or '.jpeg' in message.attachments[0].filename:
+        if ('.png' in message.attachments[0].filename or '.jpg' in message.attachments[0].filename or '.jpeg' in message.attachments[0].filename) and message.author.id != client.user.id:
             print(message.attachments)
             await message.attachments[0].save("/home/pi/mark/images/" + message.attachments[0].filename)
             imagepath = "/home/pi/mark/images/" + message.attachments[0].filename
@@ -55,14 +56,19 @@ async def on_message(message):
                 im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
 
             os.remove(imagepath)
-            #await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + "/" + str(message.channel.id) + ".png"))
+
+        elif message.author.id == client.user.id:
+            lastImage[message.channel.id][message] = message.id
+            lastImage[message.channel.id][thanked] = False
+            print(lastImage)
+
 
     if message.content.lower().startswith("mark, ") or message.content.lower().startswith("dr. mark, ") or message.content.lower().startswith("dr mark"):
 
         if 'mark, reboot' in message.content.lower() and message.author.id == 235221408274186242:
             await message.channel.send("Rebooting...")
             os.system("sudo reboot")
-        
+
         elif 'mark, ifconfig' in message.content.lower() and message.author.id == 235221408274186242:
             cmd = "ifconfig -a"
             inet = subprocess.check_output(cmd, shell = True)
@@ -343,19 +349,27 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
 
         else:
             await message.channel.send('I do not understand this meme. Say "Mark, help" for a list of officially supported commands.')
+
         if sendImage == True:
             print("Trying to send image")
             print("size = " + str(os.stat("/home/pi/mark/images/" + str(message.channel.id) + ".png").st_size))
             if os.stat("/home/pi/mark/images/" + str(message.channel.id) + ".png").st_size > 8000000:
                 await message.channel.send("Image too large. Try again with a smaller image")
+                sendImage = False
             else:
-                await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + ".png"))
-            sendImage = False
+                msg = await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + ".png"))
+                sendImage = False
+                await asyncio.sleep(30)
+                if msg.id == lastImage[msg.channel.id][message] and lastImage[msg.channel.id][thanked] == True:
+                    return
+                else:
+                    await msg.delete()
     else:
         if 'party' in message.content.lower():
             await message.channel.send("Don't serve alcohol to minors")
-        if 'thanks' in message.content.lower():
-            await message.channel.send("thanks viban eom")
+        if 'thanks' in message.content.lower() or 'thank you' in message.content.lower():
+            lastImage[message.channel.id][thanked] = True
+
         print('entering grt lottery')
         if random.randrange(100) == 69:
         #if True:
