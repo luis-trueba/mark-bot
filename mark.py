@@ -218,6 +218,33 @@ async def on_message(message):
             im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
             sendImage = True
 
+        elif 'mark, brightness' in message.content.lower():
+            brightness_input = message.content.lower().split("mark, brightness ",1)[1]
+            if brightness_input.replace('.', '', 1).isdigit() and float(brightness_input) <= 5 and float(brightness_input) >= 0:
+                brightness = float(brightness_input)
+            else:
+                print("not valid number")
+                brightness = 1.0
+
+            im1 = Image.open("/home/pi/mark/images/" + str(message.channel.id) + ".png")
+            enhance = ImageEnhance.Brightness(im1)
+            im1 = enhance.enhance(brightness)
+            im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
+            sendImage = True
+
+        elif 'mark, resize' in message.content.lower():
+            size_input = message.content.lower().split("mark, resize ",1)[1]
+            if size_input.replace('.', '', 1).isdigit() and float(size_input) <= 5 and float(size_input) >= 0:
+                img_size = float(size_input)
+            else:
+                print("not valid number")
+                img_size = 1.0
+
+            im1 = Image.open("/home/pi/mark/images/" + str(message.channel.id) + ".png")
+            im1 = im1.resize((int(float(im1.width)*img_size), int(float(im1.height)*img_size)))
+            im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
+            sendImage = True
+
 
         elif 'ants' in message.content.lower():
             await message.channel.send("""Ants are eusocial insects of the family Formicidae and, along with the related wasps and bees, belong to the order Hymenoptera. Ants evolved from wasp-like ancestors in the Cretaceous period, about 140 million years ago, and diversified after the rise of flowering plants. More than 12,500 of an estimated total of 22,000 species have been classified.[5][6] They are easily identified by their elbowed antennae and the distinctive node-like structure that forms their slender waists.  Ants form colonies that range in size from a few dozen predatory individuals living in small natural cavities to highly organised colonies that may occupy large territories and consist of millions of individuals. Larger colonies consist of various castes of sterile, wingless females, most of which are workers (ergates), as well as soldiers (dinergates) and other specialised groups.[7][8] Nearly all ant colonies also have some fertile males called "drones" (aner) and one or more fertile females called "queens\"""")
@@ -305,6 +332,7 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
 -Say `Mark, jpeg <1 - 100>` and I will jpeg compress the most recent image sent to the channel with that percent of quality.
 -Say `Mark, saturation <0.0 - 5.0>` and I will adjust the saturation of the most recent image sent to the channel. 0 is grayscale, 1 is normal.
 -Say `Mark, sharpness <0.0 - 5.0>` and I will adjust the sharpness of the most recent image sent to the channel. 0 is very blurry, 1 is normal, 5 is extremely sharp.
+-Say `Mark, brightness <0.0 - 5.0>` and I will adjust the brightness of the most recent image sent to the channel. 0 is pitch black, 1 is normal, 5 is extremely bright.
 -If you want more features, bap luis and he might eventually get around to it."""
             if message.guild.id == 650229854247321611:
                 payload = payload + """
