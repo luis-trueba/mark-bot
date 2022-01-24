@@ -54,12 +54,13 @@ async def on_message(message):
 
             if width < 4096 and height < 4096:
                 im1.save("/home/pi/mark/images/" + str(message.channel.id) + ".png")
-
-            os.remove(imagepath)
+            else:
+                os.remove(imagepath)
 
         elif message.author.id == client.user.id:
-            lastImage[message.channel.id][message] = message.id
-            lastImage[message.channel.id][thanked] = False
+            lastImage[message.channel.id] = {}
+            lastImage[message.channel.id]["message"] = message.id
+            lastImage[message.channel.id]["thanked"] = False
             print(lastImage)
 
 
@@ -360,7 +361,7 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
                 msg = await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + ".png"))
                 sendImage = False
                 await asyncio.sleep(30)
-                if msg.id == lastImage[msg.channel.id][message] and lastImage[msg.channel.id][thanked] == True:
+                if msg.id == lastImage[msg.channel.id]["message"] and lastImage[msg.channel.id]["thanked"] == True:
                     return
                 else:
                     await msg.delete()
@@ -368,7 +369,7 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
         if 'party' in message.content.lower():
             await message.channel.send("Don't serve alcohol to minors")
         if 'thanks' in message.content.lower() or 'thank you' in message.content.lower():
-            lastImage[message.channel.id][thanked] = True
+            lastImage[message.channel.id]["thanked"] = True
 
         print('entering grt lottery')
         if random.randrange(100) == 69:
