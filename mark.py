@@ -21,6 +21,7 @@ gis = GoogleImagesSearch(os.getenv("gis1"), os.getenv("gis2"))
 
 timeoutlist = []
 lastImage = {}
+savedImages = []
 
 client = discord.Client()
 @client.event
@@ -58,9 +59,7 @@ async def on_message(message):
                 os.remove(imagepath)
 
         elif message.author.id == client.user.id:
-            lastImage[message.channel.id] = {}
-            lastImage[message.channel.id]["message"] = message.id
-            lastImage[message.channel.id]["thanked"] = False
+            lastImage[message.channel.id] = message.id
             print(lastImage)
 
 
@@ -361,7 +360,10 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
                 msg = await message.channel.send(file = discord.File("/home/pi/mark/images/" + str(message.channel.id) + ".png"))
                 sendImage = False
                 await asyncio.sleep(30)
-                if msg.id == lastImage[msg.channel.id]["message"] and lastImage[msg.channel.id]["thanked"] == True:
+                print(msg.id)
+                if msg.id in savedImages:
+                    print("do not delete")
+                    savedImages.remove(msg.id)
                     return
                 else:
                     await msg.delete()
@@ -369,7 +371,14 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
         if 'party' in message.content.lower():
             await message.channel.send("Don't serve alcohol to minors")
         if 'thanks' in message.content.lower() or 'thank you' in message.content.lower():
-            lastImage[message.channel.id]["thanked"] = True
+            if str(await message.channel.fetch_message(lastImage[message.channel.id])) == "":
+                print("no message")
+            else:
+                print("ight we got one")
+                savedImages.append(lastImage[message.channel.id])
+                print(savedImages)
+                await message.add_reaction("✅")
+                lastImage[message.channel.id] = 0
 
         print('entering grt lottery')
         if random.randrange(100) == 69:
