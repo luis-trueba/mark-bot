@@ -334,11 +334,14 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
 -Say `Mark, can we get <search term>` and I'll drop the first youtube result for that search into the chat.
 -Say `Mark, should I ____` and I will respond yes or no for single choices, and will choose between multiple options separated by the substring ` or `!
 -Say `Mark, show me ____` and I will find a good image matching your search parameters.
--Say `Mark, flip` or `Mark, flop` and I will invert the most recent image sent to the channel across the vertical or horizontal axis, respectively.
--Say `Mark, jpeg <1 - 100>` and I will jpeg compress the most recent image sent to the channel with that percent of quality.
--Say `Mark, saturation <0.0 - 5.0>` and I will adjust the saturation of the most recent image sent to the channel. 0 is grayscale, 1 is normal.
--Say `Mark, sharpness <0.0 - 5.0>` and I will adjust the sharpness of the most recent image sent to the channel. 0 is very blurry, 1 is normal, 5 is extremely sharp.
--Say `Mark, brightness <0.0 - 5.0>` and I will adjust the brightness of the most recent image sent to the channel. 0 is pitch black, 1 is normal, 5 is extremely bright.
+-I can edit images!
+    -Say `Mark, flip` or `Mark, flop`: left <-> right or top <-> bottom mirror.
+    -Say `Mark, jpeg <1 - 100>`: apply 0-100% jpeg quality compression.
+    -Say `Mark, saturation <0.0 - 5.0>`: Saturation adjustment. 0 is grayscale, 1 is normal.
+    -Say `Mark, sharpness <0.0 - 5.0>`: Sharpness adjustment. 0 is very blurry, 1 is normal, 5 is extremely sharp.
+    -Say `Mark, brightness <0.0 - 5.0>`: Brightness adjustment. 0 is pitch black, 1 is normal, 5 is extremely bright.
+    -Say `Mark, resize <0.0 - 5.0>`: Image resizer. 1 is same size as before.
+-To prevent channel clutter, I will delete any image I send after 30 seconds! Say 'thanks' or 'thank you' and I'll save the last image I sent.
 -If you want more features, bap luis and he might eventually get around to it."""
             if message.guild.id == 650229854247321611:
                 payload = payload + """
