@@ -109,11 +109,14 @@ async def on_message(message):
 
             if ' or ' in message.content.lower():
                 payload = "You should "
-                answers = message.content.lower().split("should i ",1)[1].split(" or ")
+                if random.randrange(50) == 69:
+                    answers = ["not"]
+                else:
+                    answers = message.content.lower().split("should i ",1)[1].split(" or ")
 
             else:
                 payload = ""
-                answers = ["Yes", "No"]
+                answers = ["Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Yes", "No", "Maybe"]
 
             await message.channel.send(payload + random.choice(answers))
 
