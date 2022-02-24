@@ -109,7 +109,7 @@ async def on_message(message):
 
             if ' or ' in message.content.lower():
                 payload = "You should "
-                if random.randrange(50) == 1:
+                if random.randrange(50) == 69:
                     answers = ["not"]
                 else:
                     answers = message.content.lower().split("should i ",1)[1].split(" or ")
