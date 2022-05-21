@@ -5,6 +5,7 @@ import random
 import time
 import asyncio
 import subprocess
+import urllib.request, json #to load json requests
 
 import discord
 from dotenv import load_dotenv
@@ -139,6 +140,19 @@ async def on_message(message):
                 link = results["search_result"][0]["link"]
                 print(results)
                 await message.channel.send(link)
+        elif 'mark, laundry' in message.content.lower():
+            with urllib.request.urlopen("http://laundry.mit.edu/watch") as url:
+                data = json.loads(url.read().decode())
+                laundry_status_mapping = {
+                    "ON": "Busy",
+                    "UNKNOWN": "Unknown",
+                    "OFF": "Free",
+                    "BROKEN": "Broken"
+                }
+                washers = [laundry_status_mapping[x] for x in data["washers"]["status"]]
+                dryers = [laundry_status_mapping[x] for x in data["dryers"]["status"]]
+                await message.channel.send('Washers: ' + ', '.join(washers) + '\n' + 'Dryers: ' + ', '.join(dryers))
+        
         elif 'mark, show me' in message.content.lower():
             _search_params = {
 
