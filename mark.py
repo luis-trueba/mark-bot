@@ -151,8 +151,7 @@ async def on_message(message):
                 }
                 washers = [laundry_status_mapping[x] for x in data["washers"]["status"]]
                 dryers = [laundry_status_mapping[x] for x in data["dryers"]["status"]]
-                await message.channel.send('Washers:', ', '.join(washers))
-                await message.channel.send('Dryers:', ', '.join(dryers))
+                await message.channel.send('Washers: ' + ', '.join(washers) + '\n' + 'Dryers: ' + ', '.join(dryers))
         
         elif 'mark, show me' in message.content.lower():
             _search_params = {
