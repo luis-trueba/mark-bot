@@ -402,7 +402,9 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
                 print(savedImages)
                 await message.add_reaction("✅")
                 lastImage[message.channel.id] = 0
-
+        if message.content.lower().startswith("i'm ") or message.content.lower().startswith("i’m "):
+            if random.randrange(2) == 1:
+                await message.channel.send("Hi " + message.content[3:] + ", I'm mark!")
         print('entering grt lottery')
         if random.randrange(100) == 69:
         #if True:
