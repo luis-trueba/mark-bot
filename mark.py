@@ -403,13 +403,13 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
                 await message.add_reaction("✅")
                 lastImage[message.channel.id] = 0
         if message.content.lower().startswith("i'm ") or message.content.lower().startswith("i’m "):
-            if random.randrange(2) == 1:
+            if random.randrange(3) == 1:
                 await message.channel.send("Hi " + message.content[4:] + ", I'm mark!")
         print('entering grt lottery')
         if random.randrange(100) == 69:
         #if True:
             if message.guild.id == 827766668360417302:
-                grtphrases = ["goat server stuff placeholder text.", "goat server placeholder text 2"]
+                grtphrases = ["Let's watch Cars 3 tonight!", "Anna Kendrick", "I hope you have a goatastic day!", "Stay hydrated", "Follow Prince Raglan at https://www.twitch.tv/PrinceRaglan", "goat server placeholder text 2"]
             else:
                 grtphrases = ["You should come to a GRT meal!", "How has your sleep been?", "Ants have very interesting social hierarcharies with complex gender roles!", "Here guys, I made some bread! :bread:", "Bustin by Neil Cicierega is about sex", "Don't let people in through the 282 entrance!", "You should bug me for career advice!", "I don't understand this meme", "I made hummus!", "I made boba, do you guys want any?", "Do you want some soymilk?", "I am getting in an argument with faculty.", "I am getting in an argument with MIT administration.", "I have pissed off the mighty Reif himself.", "I am arguing with Cindy Barnhart.", "I am frying some stuff, do you want some plantains?", "How are we gonna take care of the dish situation?", "I work at the EPA now", "How's your semester going?", "This seems like a bad idea", "How can we do this in a safer way?", "Can we direct this into something more productive?", "Do you think that this is an effective strategy?", "Please consider talking to S^3 for resources.", "Please remember to wear a mask", "Are you registered to vote?", "Maybe we should be more civil to other people", "You should pursue the career you want, but don't get discouraged if you need to grab something that pays good for the time being."]
             await message.channel.send(random.choice(grtphrases))
