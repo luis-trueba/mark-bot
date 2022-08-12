@@ -406,7 +406,7 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
             if random.randrange(3) == 1:
                 await message.channel.send("Hi " + message.content[4:] + ", I'm mark!")
         print('entering grt lottery')
-        if random.randrange(100) == 69:
+        if random.randrange(100) == 69 or (message.author.id == 235221408274186242 and message.content.lower == "say the line, mark"):
         #if True:
             if message.guild.id == 827766668360417302:
                 grtphrases = ["Let's watch Cars 3 tonight!", "Anna Kendrick", "I hope you have a goatastic day!", "Stay hydrated", "Follow Prince Raglan at https://www.twitch.tv/PrinceRaglan", "goat server placeholder text 2"]
