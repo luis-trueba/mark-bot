@@ -111,7 +111,10 @@ async def on_message(message):
 
         elif 'mark, should i' in message.content.lower():
 
-            if ' or ' in message.content.lower():
+            if (message.author.id == 251172324609359872 or message.author.id == 235221408274186242) and random.randrange(200) == 69:
+                payload = ""
+                answers = ["bitch u better not be using me for all ur important decisions"]
+            elif ' or ' in message.content.lower():
                 payload = "You should "
                 if random.randrange(50) == 1:
                     answers = ["not"]
