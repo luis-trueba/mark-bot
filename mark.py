@@ -300,60 +300,6 @@ async def on_message(message):
                         payload = 'Put ' + member.mention + ' in timeout for crimes in ' + str(message.channel.mention)
                         await message.channel.send(payload)
 
-        elif 'mark, homestuck jail ' in message.content.lower() and message.guild.id == 650229854247321611:
-
-            if 'homestuck' in str( message.channel) or 'horny' in str( message.channel):
-
-                await message.channel.send('Homestuck Crimes cannot be committed in ' + message.channel.mention)
-
-            else:
-
-                for member in message.mentions:
-
-                    if '715481459196166184' in str(member.roles):
-
-                        await message.channel.send(member.mention + ' is already in homestuck jail and cannot be tried again for the same crime')
-
-                    else:
-
-                        await member.add_roles(discord.utils.get(message.guild.roles, id=715481459196166184))
-
-                        payload = 'Jailed ' + member.mention + ' for homestuck crimes in ' + message.channel.mention
-
-                        await message.channel.send(payload)
-
-                await asyncio.sleep(120)
-
-                for member in message.mentions:
-
-                    if '715481459196166184' in str(member.roles):
-
-                        await member.remove_roles(discord.utils.get(message.guild.roles, id=715481459196166184))
-
-                        await message.channel.send('Released ' + member.mention + ' from homestuck jail after serving their time')
-
-
-
-        elif 'mark, jailbreak adventure' in message.content.lower() and message.guild.id == 650229854247321611:
-
-            if 'homestuck' in str( message.channel) or 'horny' in str( message.channel):
-
-                await message.channel.send('Nice try! You cannot jailbreak from ' + message.channel.mention)
-
-            else:
-
-                for member in message.mentions:
-
-                    if '715481459196166184' in str(member.roles):
-
-                        await member.remove_roles(discord.utils.get(message.guild.roles, id=715481459196166184))
-
-                        await message.channel.send(member.mention + ' has escaped from homestuck jail with the help of ' + message.author.mention)
-
-                    else:
-
-                        await message.channel.send('Justice has been served. ' + member.mention + ' is already out of jail.')
-
 
         elif ' help' in message.content.lower():
             payload = """ Hello kiddos, I'm Mark!
@@ -361,6 +307,7 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
 -Say `Mark, roll NdXYZ` to roll N XYZ sided dice! e.g `Mark, roll 12d6` rolls 12x 6-sided dice
 -Say `Mark, can we get <search term>` and I'll drop the first youtube result for that search into the chat.
 -Say `Mark, should I ____` and I will respond yes or no for single choices, and will choose between multiple options separated by the substring ` or `!
+-Say `Mark, timeout @<user>` to send a user to timeout. They will need to apologize for their actions in order to regain speaking privileges.
 -Say `Mark, show me ____` and I will find a good image matching your search parameters.
 -I can edit images!
     -Say `Mark, flip` or `Mark, flop`: left <-> right or top <-> bottom mirror.
@@ -370,11 +317,9 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
     -Say `Mark, brightness <0.0 - 5.0>`: Brightness adjustment. 0 is pitch black, 1 is normal, 5 is extremely bright.
     -Say `Mark, resize <0.0 - 5.0>`: Image resizer. 1 is same size as before.
 -To prevent channel clutter, I will delete any image I send after 30 seconds! Say 'thanks' or 'thank you' and I'll save the last image I sent.
+-I will automatically fix any links to the hellsite formerly known as twitter dot com, so that they will embed in Discord. 
 -If you want more features, bap luis and he might eventually get around to it."""
-            if message.guild.id == 650229854247321611:
-                payload = payload + """
--Also, in this server, I can send users to Horny Jail with `Mark, jail <mention users>`
--You can free them early with `Mark, jailbreak <mention users>` but this is frowned upon as it is obstruction of justice."""
+
             await message.channel.send(payload)
 
 
@@ -419,7 +364,7 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
             if message.guild.id == 827766668360417302:
                 grtphrases = ["Let's watch Cars 3 tonight!", "Anna Kendrick", "I hope you have a goatastic day!", "Stay hydrated", "Follow Prince Raglan at https://www.twitch.tv/PrinceRaglan", "goat server placeholder text 2"]
             else:
-                grtphrases = ["You should come to a GRT meal!", "How has your sleep been?", "Ants have very interesting social hierarcharies with complex gender roles!", "Here guys, I made some bread! :bread:", "Bustin by Neil Cicierega is about sex", "Don't let people in through the 282 entrance!", "You should bug me for career advice!", "I don't understand this meme", "I made hummus!", "I made boba, do you guys want any?", "Do you want some soymilk?", "I am getting in an argument with faculty.", "I am getting in an argument with MIT administration.", "I have pissed off the mighty Reif himself.", "I am arguing with Cindy Barnhart.", "I am frying some stuff, do you want some plantains?", "How are we gonna take care of the dish situation?", "I work at the EPA now", "How's your semester going?", "This seems like a bad idea", "How can we do this in a safer way?", "Can we direct this into something more productive?", "Do you think that this is an effective strategy?", "Please consider talking to S^3 for resources.", "Please remember to wear a mask", "Are you registered to vote?", "Maybe we should be more civil to other people", "You should pursue the career you want, but don't get discouraged if you need to grab something that pays good for the time being."]
+                grtphrases = ["You should come to a GRT meal!", "How has your sleep been?", "Ants have very interesting social hierarcharies with complex gender roles!", "Here guys, I made some bread! :bread:", "Bustin by Neil Cicierega is about sex", "Don't let people in through the 282 entrance!", "You should bug me for career advice!", "I don't understand this meme", "I made hummus!", "I made boba, do you guys want any?", "Do you want some soymilk?", "I am getting in an argument with faculty.", "I am getting in an argument with MIT administration.", "I have pissed off the mighty Reif himself.", "I am arguing with Cindy Barnhart.", "I am frying some stuff, do you want some plantains?", "How are we gonna take care of the dish situation?", "I work at the EPA now", "How's your semester going?", "This seems like a bad idea", "How can we do this in a safer way?", "Can we direct this into something more productive?", "Do you think that this is an effective strategy?", "Please consider talking to S^3 for resources.", "Please remember to wear a mask", "Are you registered to vote?", "Maybe we should be more civil to other people", "You should pursue the career you want, but don't get discouraged if you need to grab something that pays good for the time being.", "I do not condone throwing rocks at fluorescent light fixtures."]
             await message.channel.send(random.choice(grtphrases))
         if 'pog' in message.content.lower() and message.author.id == 235221408274186242:
             await message.channel.send(message.author.mention + ", don't say pog")
