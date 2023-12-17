@@ -152,16 +152,28 @@ async def on_message(message):
                 print(results)
                 await message.channel.send(link)
         elif 'mark, laundry' in message.content.lower():
+            def time_to_string(time):
+                if time < 60:
+                    return f'{time}m'
+                if time < 60*24:
+                    return f'{int(time/60)}h'
+                return f'{int(time/60/24)}'
             with urllib.request.urlopen("http://laundry.mit.edu/watch") as url:
                 data = json.loads(url.read().decode())
                 laundry_status_mapping = {
-                    "ON": "Busy",
-                    "UNKNOWN": "Unknown",
-                    "OFF": "Free",
-                    "BROKEN": "Broken"
+                    "On": "Busy",
+                    "Uknown": "Unknown",
+                    "Off": "Free",
+                    "Broken": "Broken"
                 }
-                washers = [laundry_status_mapping[x] for x in data["washers"]["status"]]
-                dryers = [laundry_status_mapping[x] for x in data["dryers"]["status"]]
+                washerStatus = [laundry_status_mapping[x["power_status"]] for x in data["washers"]["status"]]
+                washerFor = [int(x["since_updated"]/1000/60) for x in data["washers"]["status"]]
+                dryerStatus = [laundry_status_mapping[x["power_status"]] for x in data["dryers"]["status"]]
+                dryerFor = [int(x["since_updated"]/1000/60) for x in data["dryers"]["status"]]
+                washers = [f'{x[0]} for {time_to_string(x[1])}' if x[0] in { "Busy", "Free"} else x[0] for x in zip(washerStatus, washerFor)]
+                dryers = [f'{x[0]} for {time_to_string(x[1])}' if x[0] in { "Busy", "Free"} else x[0] for x in zip(dryerStatus, dryerFor)]
+                washers = [x.replace("Free", "**Free**") for x in washers]
+                dryers = [x.replace("Free", "**Free**") for x in dryers]
                 await message.channel.send('Washers: ' + ', '.join(washers) + '\n' + 'Dryers: ' + ', '.join(dryers))
         
         elif 'mark, show me' in message.content.lower():
