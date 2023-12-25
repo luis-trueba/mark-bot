@@ -157,7 +157,17 @@ async def on_message(message):
                     return f'{time}m'
                 if time < 60*24:
                     return f'{int(time/60)}h'
-                return f'{int(time/60/24)}'
+                if time < 60*24*7:
+                    return f'{int(time/60/24)}d'
+                if time < 60*24*30:
+                    return f'{int(time/60/24/7)}w'
+                if time < 60*24*30*12:
+                    return f'{int(time/60/24/30)}m' # same as minutes :D  (horseshoe theory)
+                if time < 60*24*30*12*10:
+                    return f'{int(time/60/24/30/12)}y'
+                if time < 60*24*30*12*100:
+                    return f'{int(time/60/24/30/12/10)}d' # same as days :D (horseshoe theory)
+                return f'{int(time/60/24/30/12/100)}c'
             with urllib.request.urlopen("http://laundry.mit.edu/watch") as url:
                 data = json.loads(url.read().decode())
                 laundry_status_mapping = {
