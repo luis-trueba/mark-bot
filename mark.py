@@ -46,10 +46,10 @@ async def on_message(message):
             await message.delete()
         return
 
-    if "https://twitter.com" in message.content.lower() or "https://www.twitter.com" in message.content.lower() or "https://x.com" in message.content.lower() or "https://www.x.com" in message.content.lower():
+    """if "https://twitter.com" in message.content.lower() or "https://www.twitter.com" in message.content.lower() or "https://x.com" in message.content.lower() or "https://www.x.com" in message.content.lower():
         og_message = message.content.lower()
         sanitized_message = og_message.replace("https://twitter.com", "https://vxtwitter.com").replace("https://www.twitter.com", "https://vxtwitter.com").replace("https://x.com", "https://vxtwitter.com").replace("https://www.x.com", "https://vxtwitter.com")
-        await message.channel.send("I fixed your Twitter links:" + "\n" + sanitized_message)
+        await message.channel.send("I fixed your Twitter links:" + "\n" + sanitized_message)"""
 
     if message.attachments != []:
         if ('.png' in message.attachments[0].filename or '.jpg' in message.attachments[0].filename or '.jpeg' in message.attachments[0].filename) and message.author.id != client.user.id:
@@ -339,7 +339,6 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
     -Say `Mark, brightness <0.0 - 5.0>`: Brightness adjustment. 0 is pitch black, 1 is normal, 5 is extremely bright.
     -Say `Mark, resize <0.0 - 5.0>`: Image resizer. 1 is same size as before.
 -To prevent channel clutter, I will delete any image I send after 30 seconds! Say 'thanks' or 'thank you' and I'll save the last image I sent.
--I will automatically fix any links to the hellsite formerly known as twitter dot com, so that they will embed in Discord. 
 -If you want more features, bap luis and he might eventually get around to it."""
 
             await message.channel.send(payload)
