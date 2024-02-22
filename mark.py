@@ -46,10 +46,10 @@ async def on_message(message):
             await message.delete()
         return
 
-    """if "https://twitter.com" in message.content.lower() or "https://www.twitter.com" in message.content.lower() or "https://x.com" in message.content.lower() or "https://www.x.com" in message.content.lower():
+    if "https://twitter.com" in message.content.lower() or "https://www.twitter.com" in message.content.lower() or "https://x.com" in message.content.lower() or "https://www.x.com" in message.content.lower():
         og_message = message.content.lower()
         sanitized_message = og_message.replace("https://twitter.com", "https://vxtwitter.com").replace("https://www.twitter.com", "https://vxtwitter.com").replace("https://x.com", "https://vxtwitter.com").replace("https://www.x.com", "https://vxtwitter.com")
-        await message.channel.send("I fixed your Twitter links:" + "\n" + sanitized_message)"""
+        await message.channel.send("I fixed your Twitter links:" + "\n" + sanitized_message)
 
     if message.attachments != []:
         if ('.png' in message.attachments[0].filename or '.jpg' in message.attachments[0].filename or '.jpeg' in message.attachments[0].filename) and message.author.id != client.user.id:
