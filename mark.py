@@ -49,7 +49,7 @@ async def on_message(message):
     if "https://twitter.com" in message.content.lower() or "https://www.twitter.com" in message.content.lower() or "https://x.com" in message.content.lower() or "https://www.x.com" in message.content.lower():
         og_message = message.content
         sanitized_message = og_message.replace("https://twitter.com", "https://vxtwitter.com").replace("https://www.twitter.com", "https://vxtwitter.com").replace("https://x.com", "https://vxtwitter.com").replace("https://www.x.com", "https://vxtwitter.com")
-        await message.channel.send(message.author.mention + " sent a message with a Twitter link in it, here's the version with better embeds:" + "\n \n" + sanitized_message)
+        await message.channel.send(message.author.mention + " sent a message with a Twitter link in it, here's the version with better embeds:" + "\n \n >>> " + sanitized_message)
         await message.delete()
 
     if message.attachments != []:
