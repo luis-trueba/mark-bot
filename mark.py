@@ -366,8 +366,8 @@ My prefix is `Mark, ` and I can do all sorts of things. Please, no parties on my
                 else:
                     await msg.delete()
     else:
-        if 'party' in message.content.lower():
-            await message.channel.send("Don't serve alcohol to minors")
+#        if 'party' in message.content.lower():
+#            await message.channel.send("Don't serve alcohol to minors")
         if 'thanks' in message.content.lower() or 'thank you' in message.content.lower():
             if str(await message.channel.fetch_message(lastImage[message.channel.id])) == "":
                 print("no message")
