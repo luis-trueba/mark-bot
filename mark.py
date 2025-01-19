@@ -76,7 +76,7 @@ async def on_message(message):
             await message.channel.send("Rebooting...")
             os.system("sudo reboot")
             
-        elif 'mark, hand over the logs' in message.content.lower() and message.author.id == 235221408274186242:
+        elif 'mark, hand over the logs' in message.content.lower() and (message.author.id == 235221408274186242 or message.author.id == 252893547718508544):
             await message.channel.send(file = discord.File("/home/pi/mark/logs.txt"))
 
         elif 'mark, ifconfig' in message.content.lower() and message.author.id == 235221408274186242:
